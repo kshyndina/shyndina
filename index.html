@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Designer, researcher, and a Woman-Machine wannabe"
+    />
+    <meta name="author" content="Karina Zavidova" />
+
+    <title>shyndina</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Use local CSS files -->
+    <link
+      rel="stylesheet"
+      href="css/bootstrap.min.css"
+      type="text/css"
+      media="all"
+    />
+    <link rel="stylesheet" href="css/blog.css" type="text/css" media="all" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Space+Mono:400,600,700,800"
+      type="text/css"
+      media="all"
+    />
+
+    <!-- Use local jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Custom CSS -->
+    <style type="text/css">
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        margin-top: 0;
+        height: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .video-container iframe,
+      .video-container object,
+      .video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .video-controls {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 10;
+        display: flex;
+        gap: 5px;
+        pointer-events: auto;
+      }
+
+      .mute-btn, .replay-btn, .pause-btn {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 12px;
+        transition: background-color 0.3s;
+        pointer-events: auto;
+      }
+
+      .mute-btn:hover, .replay-btn:hover, .pause-btn:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+        pointer-events: none;
+      }
+
+      .project img {
+        width: 100%;
+        height: auto;
+      }
+
+      .content {
+        font-size: 1.2rem;
+        width: auto;
+        cursor: context-menu;
+        margin-top: 5px;
+      }
+
+      .intro {
+        width: auto;
+        padding-left: 25px;
+        padding-top: 20px;
+        padding-bottom: 50px;
+      }
+
+      .col-sm-3,
+      .blog-sidebar,
+      .col-sm-offset-1 {
+        width: 40%;
+        font-size: 1.2rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100vh;
+        min-height: 100vh;
+        color: black;
+        position: fixed;
+        left: 0;
+        padding-bottom: 50px;
+        box-sizing: border-box;
+      }
+
+      .question {
+        font-variant: none;
+      }
+
+      .answer {
+        font-variant: italic;
+        width: 85%;
+        padding-left: 25px;
+      }
+
+      .body {
+        margin-top: -50px;
+      }
+
+      .row {
+        margin-top: auto;
+        padding-top: 0px;
+      }
+
+      .col-sm-8::-webkit-scrollbar {
+        width: 15px;
+      }
+
+      .col-sm-8::-webkit-scrollbar-track {
+        background: #ffff;
+      }
+
+      .col-sm-8::-webkit-scrollbar-thumb {
+        background: #d4d7da;
+      }
+
+      .col-sm-3::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      .col-sm-3::-webkit-scrollbar-track {
+        background: #000000;
+      }
+
+      .col-sm-3::-webkit-scrollbar-thumb {
+        background: #949ba3;
+      }
+
+      @media screen and (max-width: 992px) {
+        .blog-main {
+          display: block;
+        }
+      }
+
+      @media screen and (max-width: 700px) {
+        .question {
+          padding-left: 10px;
+          margin: 14px;
+          color: #949ba3;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        .blog-main {
+          display: block;
+          width: 100%;
+        }
+        .col-sm-8 {
+          float: right;
+          width: 80% !important;
+          margin-right: 1px;
+          margin-top: none;
+        }
+        .content {
+          display: none;
+        }
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      h2.blog-post-title {
+        font-family: "Space Mono", sans-serif;
+        font-size: 1.2rem;
+        color: black;
+        text-shadow: 2px 2px 2px #cccccc;
+        margin-top: 60px;
+        margin-bottom: 20px;
+      }
+      
+      a {
+        font-family: "Space Mono", sans-serif;
+        font-size: 1.2rem;
+        color: black;
+        margin-top: 60px;
+        margin-bottom: 20px;
+      }
+
+      .random {
+        padding-top: 17px;
+      }
+
+      .random img {
+        box-shadow: 0 0 15px #99cccc;
+        border-radius: 10px;
+        margin-top: 25px;
+        margin-bottom: 60px;
+        margin: 0 auto;
+        height: 30px;
+        width: 70%;
+      }
+
+      .blog-main {
+        width: 100%;
+        min-height: 100vh;
+        overflow: auto;
+        padding-bottom: 50px;
+      }
+
+      .col-sm-8 {
+        float: right;
+        width: 52%;
+        margin-top: none;
+        margin-right: 0;
+        padding-right: 50px;
+        overflow-y: auto;
+        height: 100vh;
+        padding-bottom: 50px;
+        box-sizing: border-box;
+      }
+
+      .blog-post {
+        width: 100%;
+        float: none;
+        padding-right: 50px;
+      }
+
+      span {
+        color: black;
+      }
+
+      .excerpt p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        margin-top: 30px;
+      }
+
+      .metadata {
+        color: #949ba3;
+        font-size: 1.2rem;
+        margin-right: 40px;
+        padding-bottom: 0;
+      }
+
+      .box {
+        background-color: white;
+        overflow: hidden;
+        padding: 0 0;
+        margin-right: 0;
+        padding-bottom: 0;
+        width: 100%;
+      }
+
+      .project {
+        overflow: hidden;
+        padding: 0 0;
+      }
+
+      .gridcontainer h2 a {
+        color: #333;
+        font-size: 13px;
+      }
+      .gridcontainer .griditemleft {
+        float: left;
+        width: 150px;
+        margin: 0 30px 20px 0;
+      }
+      .gridcontainer .griditemright {
+        float: left;
+        width: 150px;
+      }
+      .gridcontainer .postimage {
+        margin: 0 0 5px 0;
+      }
+      .gridcontainer .postimage-title {
+        text-align: center;
+      }
+
+      .company {
+        white-space: pre-line;
+        margin-bottom: 20px;
+      }
+
+      .contact-link {
+        text-decoration: none;
+        color: black;
+      }
+
+      .contact-link:hover {
+        text-decoration: underline;
+        color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="blog-masthead">
+      <div class="container"></div>
+    </div>
+
+    <div class="container">
+      <div class="blog-header">
+        <div class="blog-title">
+          <a href="index.html">
+            <img src="assets/files/rock.png" alt="image" id="home" />
+          </a>
+        </div>
+        <audio autoplay="">
+          <source src="assets/files/purr.mp3" type="audio/mp3" />
+        </audio>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Release</i>
+              </h2>
+              <span class="exceriframept">
+                <p>
+                  A huge 2.0 re-launch of Dexcelerate — the new design rollout introducing multiple first-on-market trading features and showing how the platform gives traders a real edge.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-1"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/uUS6kgPrIKY?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Release"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-1">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-1">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-1">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Trackers</i>
+              </h2>
+              <span class="excerpt">
+                <p>
+                  Interface and motion design for Dexcelerate's Trackers — four interchangeable panels that replace endless browser tabs. Users can view Twitter, Memepool, and Watchlist data together in one synced, trade-ready dashboard.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-2"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/cB3YJoFsaLo?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Trackers"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-2">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-2">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-2">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Twitter/X</i>
+              </h2>
+              <span class="excerpt">
+                <p>
+                  System design for the X integration that autotrades the moment a KOL posts. Traders can link their accounts, set rules, and let bots execute instantly — no need to stay awake waiting for a drop.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-3"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/mJcG9P9oyzs?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Twitter/X"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-3">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-3">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-3">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Lists (Multi-Agent)</i>
+              </h2>
+              <span class="excerpt">
+                <p>
+                  Creative direction for Dexcelerate's Lists — also known as Multi-Agent automation. A network of bots that combine Telegram, X, Discord, wallets, and real-time filters to trade like a full 24/7 team.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-4"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/w3v5mKAH8Do?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Lists (Multi-Agent)"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-4">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-4">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-4">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Telegram</i>
+              </h2>
+              <span class="excerpt">
+                <p>
+                  Visual and product design for the Telegram integration. It scans posts for contract addresses, logs and ranks callers, and lets users autotrade verified signals with custom filters.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-5"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/wnbt3lZDM1w?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Telegram"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-5">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-5">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-5">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Automation</i>
+              </h2>
+              <span class="excerpt">
+                <p>
+                  Experience design for the Autotrading engine that executes trades fully under user control — from entry and exit rules to stop-loss and take-profit targets — running continuously around the clock.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-6"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/UE9HK_G0rF8?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Automation"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-6">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-6">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-6">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blog-post">
+            <div class="metadata">
+              <h2 class="blog-post-title">
+                <span style="color: #949ba3">Title – </span>
+                <i>Channels</i>
+              </h2>
+              <span class="excerpt">
+                <p>
+                  Analytics interface for Channels — a data hub that tracks every caller's win rate, ROI, and top tokens, helping users follow only the most profitable sources.
+                </p>
+              </span>
+            </div>
+
+            <div class="box">
+              <div class="project" id="style-14">
+                <div class="video-container">
+                  <iframe
+                    id="video-7"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/3RmEl7asT4s?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    title="Channels"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                  <div class="video-controls">
+                    <button class="replay-btn" data-video-id="video-7">🔄 Replay</button>
+                    <button class="pause-btn" data-video-id="video-7">⏸️ Pause</button>
+                    <button class="mute-btn" data-video-id="video-7">🔇 Unmute</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 blog-sidebar">
+          <div class="content">
+            <div class="intro">
+              <p class="answer">
+                <i
+                  >Ukrainian-born, world-wandering marketing & project
+                  manager</i
+                >
+              </p>
+              <p class="answer">
+                (Remote Operations HQ, TimeZone Flexible, INT 00001, Global)
+              </p>
+              <p class="answer">The cast of characters:</p>
+              <ul style="padding-left: 25px; margin-left: 0;">
+                <li>Kateryna Shyndina, webpage owner</li>
+                <li>A visitor</li>
+              </ul>
+            </div>
+            <p class="answer">Hello visitor, how are you?</p>
+            <p class="question">
+              Hey hey hey! I'm doing well, so... you're looking for job I see. How did you get here?
+            </p>
+            <p class="answer">
+              It all started with analyzing lipstick sales at Maybelline in 2020. The path involved 3 L'Oréal brands, 1 CRO agency, multiple country moves, and a Web3 startup that taught me more in 10 months than some people learn in years.
+            </p>
+            <p class="question">And when do you say all of this happened? Tell me.</p>
+            <div class="company answer">
+              L'Oréal (2020-2023): Corporate / FMCG / Beauty
+
+              Maybelline → Kiehl's → Vichy
+              Kyiv → Prague
+            <ul style="padding-left: 25px; margin-left: 0;">
+              <li>Managed creative & media agencies for campaign launches</li>
+              <li>Led first L'Oréal Luxe multibrand promo with major retail partner</li>
+              <li>Coordinated cross-functional teams: SMM, PR, retail, business development</li>
+              <li>Monthly sales analysis and competitor research (got embarrassingly good at Excel)</li>
+              <li>Briefed agencies, managed influencer squads with PR teams, executed product launches with all operational work - listings, sales materials, POS, pricing, forecasts</li>
+              <li>Learned that big budgets don't guarantee good work - they only guarantee more meetings and intermediaries</li></ul>
+              <strong>Key lesson:</strong> Corporate results don't need to be groundbreaking or exceptional. They just need to be predictable. As long as it was forecasted - it's fine.
+            </div>
+            <p class="question">And then what happened?</p>
+            <div class="company answer">
+              Spiralyze (2024-2025): Agency / SaaS & D2C
+              Project Manager, CRO Agency
+              Remote
+              
+              <ul style="padding-left: 25px; margin-left: 0;">
+                <li>Managed 5+ parallel SaaS and D2C client projects simultaneously</li>
+                <li>Coordinated designers, developers, QA specialists, and clients who changed their minds weekly</li>
+                <li>Analyzed and segmented traffic/conversion data, presented insights to stakeholders weekly</li>
+                <li>Built A/B testing roadmaps using competitor analysis, winning patterns, and user funnel research</li>
+                <li>Kept all teams aligned during constant priority shifts</li>
+                <li>Worked with teams across 5+ time zones daily</li></ul>
+                <strong>Key lesson:</strong> A lot of times, what you like better won't be what actually converts (Data > opinions). Between a proven winning pattern and a new "genius" solution - the first wins 99.99% of the time. Also, I'm really good at organizing chaos.
+            </div>
+            <p class="question">And what was next? Don't tell me it's Web3!</p>
+            <div class="company answer">
+              Dexcelerate (2025): Startup / Crypto-Trading / Trenches
+              Marketing Director, DeFi Trading Platform
+              Remote
+              
+              <ul style="padding-left: 25px; margin-left: 0;">
+                <li>Built marketing operations from scratch for Solana/BNB memecoin trading platform.</li>
+                <li>Team Building (0→5): Built marketing and creative team from ground zero</li>
+                <li>Created workflows, asset/sound libraries, production pipelines</li>
+                <li>Implemented rolling 3-month content roadmap</li>
+                <li>Produced all video and static content in-house with zero outsourcing</li>
+                <li>Content Production: Studio-quality feature/release videos in weeks, not months</li>
+                <li>Built product academy showing users how to use advanced features (halved support tickets)</li>
+                <li>Translated complex concepts (limit orders, autotrading) into language normal humans and degens would understand</li>
+                <li>Pioneered AI UGC strategy: thousands of TikTok views, zero production budget</li></ul>
+                <strong>Key lesson:</strong> There's always something you can do better. Usually a lot. Give 10 people the same creative task - 5 will quote you $1000 and a week, 3 will do it for $400 in a few days, 2 will do it free by tomorrow. Only 1 will do it well. Price rarely reflects skill.
+            </div>
+            <p class="question">Okay okay, but what do you actually bring?</p>
+            <div class="company answer">
+              <strong>I know how to write.</strong> Made DeFi simple enough my grandma would get it. Can translate any technical product into human language.
+
+              <strong>I get designers.</strong> Fluent in Figma. Can show designers exactly what I want in real-time. No endless revision loops.
+
+              <strong>I ship on time.</strong> No "tomorrows." If something's blocked, I say it early so everyone can adjust.
+
+              <strong>I use AI (properly).</strong> Use AI to scale content that doesn't feel like ChatGPT wrote it. Tested AI UGC at Dexcelerate – it actually worked (based on early results).
+
+              <strong>I speak cross-functional.</strong> Dev teams don't need to translate. Business gets their metrics. Sales gets their materials. I speak all their languages.
+
+              <strong>I create systems.</strong> Build workflows where I can take a week off with 1 day prep and nothing breaks. Content calendars, asset libraries, approval flows – the boring stuff that makes everything run.
+
+              <strong>I'm chaos-proof.</strong> Budget vanished? Priorities flipped? Cool, I'll reorganize and keep shipping.
+
+              <strong>I understand data.</strong> Take data-driven decisions. Excel and GA are my friends. Test hypotheses, measure results, adjust.
+
+              <strong>I have taste.</strong> I know what good is and what looks like shit. Can QC creative work and actually improve it, not just give vague feedback.
+            </div>
+            <p class="question">
+              Alright, I'm excited, what's next?
+            </p>
+            <div class="company answer">
+              <strong>Looking for</strong> marketing and project management roles, or that hybrid startup thing where you do everything until it's more "stable".
+              
+              <strong>I want: </strong>Fast-paced teams. Crypto/fintech/tech. Remote-first. Places where execution matters more than politics. Environments where change is normal and welcomed.
+              
+              <strong>I don't want:</strong> Task management roles. Bureaucracy. More meetings than output. "We've always done it this way".
+
+              Let's talk:
+              <a href="mailto:kate.shyndina@gmail.com" class="contact-link">kate.shyndina@gmail.com</a>
+              <a href="https://t.me/byshyndina" target="_blank" class="contact-link">Telegram: @byshyndina</a>
+              <a href="https://linkedin.com/in/shyndina" target="_blank" class="contact-link">LinkedIn: @shyndina</a>
+            </div>
+          </div>
+        </div>
+        <!-- /.blog-sidebar -->
+      </div>
+      <!-- /.row -->
+    </div>
+
+    <script>
+      // Load YouTube IFrame API
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // Global variable to store players
+      var players = {};
+
+      // This function is called by the YouTube API when it's ready
+      function onYouTubeIframeAPIReady() {
+        // Initialize all video players
+        for (var i = 1; i <= 7; i++) {
+          var playerId = 'video-' + i;
+          players[playerId] = new YT.Player(playerId, {
+            events: {
+              'onReady': function(event) {
+                // All videos start muted
+                event.target.mute();
+              }
+            }
+          });
+        }
+      }
+
+      // Updated JavaScript for local paths
+      jQuery(document).ready(function ($) {
+        var path = "assets/bars/",
+          imgs = [
+            "image_1.png",
+            "image_2.png",
+            "image_3.png",
+            "image_4.png",
+            "image_5.png",
+            "image_6.png",
+            "image_7.png",
+            "image_8.png",
+            "image_9.png",
+            "image_10.png",
+            "image_11.png",
+            "image_12.png",
+          ],
+          i = Math.floor(Math.random() * imgs.length);
+        jQuery(".random").append("<img src='" + path + imgs[i] + "'>");
+
+        jQuery(".blog-title").click(function () {
+          jQuery("#home").addClass("rotate");
+        });
+
+        // Mute/Unmute button functionality
+        jQuery('.mute-btn').on('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var videoId = jQuery(this).data('video-id');
+          var player = players[videoId];
+          
+          if (player) {
+            if (player.isMuted()) {
+              player.unMute();
+              jQuery(this).html('🔊 Mute');
+            } else {
+              player.mute();
+              jQuery(this).html('🔇 Unmute');
+            }
+          }
+        });
+
+        // Replay button functionality
+        jQuery('.replay-btn').on('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var videoId = jQuery(this).data('video-id');
+          var player = players[videoId];
+          
+          if (player) {
+            player.seekTo(0);
+            player.playVideo();
+          }
+        });
+
+        // Pause/Play button functionality
+        jQuery('.pause-btn').on('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var videoId = jQuery(this).data('video-id');
+          var player = players[videoId];
+          
+          if (player) {
+            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+              player.pauseVideo();
+              jQuery(this).html('▶️ Play');
+            } else {
+              player.playVideo();
+              jQuery(this).html('⏸️ Pause');
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

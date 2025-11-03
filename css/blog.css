@@ -1,0 +1,153 @@
+/*
+ * Globals
+ */
+
+html {
+  overflow: hidden;
+}
+
+body {
+  font-family: "Space Mono", sans-serif;
+  color: white;
+  font-size: 1.7rem;
+  background-color: white;
+  max-width: none;
+}
+
+h1, .h1,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: 0;
+  font-family: "Bodoni", serif;
+  font-weight: normal;
+  color: black;
+  font-size: 6rem;
+}
+
+.cover {
+  width: 100px;
+  height: 100%;
+  background-color: black;
+  position: fixed;
+}
+
+.container {
+  width: 100%;
+}
+
+/*Home button*/
+.blog-title, .blog-title img {
+  z-index: 10;
+  position: fixed;
+  top: 20px;
+}
+
+.blog-title {
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.blog-title img {
+  width: 60px;
+  height: auto;
+}
+
+/*animation for home button*/
+.rotate {
+  transform: rotate(90deg);
+}
+
+.blog-header {
+  position: fixed;
+  top: 10;
+  z-index: 20;
+  background-color: none;
+}
+
+.blog-main {
+  font-size: 1.7rem;
+  line-height: 1.5;
+  display: inline-block;
+  padding-right: 10px;
+  z-index: 8;
+}
+
+.content {
+  z-index: 1;
+  padding-bottom: 200px;
+  font-size: 1.2rem;
+}
+
+.col-sm-3, .blog-sidebar, .col-sm-offset-1 {
+  width: 70%;
+  font-size: 1.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  min-height: 100vh;
+  color: black;
+  font-style: italic;
+  margin-left: 1.33333333% !important;
+}
+
+.sidebar {
+  float:left;
+  position: relative;
+}
+
+.pager {
+  margin-bottom: 60px;
+  text-align: left;
+}
+
+.pager > li > a {
+  width: 140px;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.col-md-6 {
+  width: auto;
+  max-height: 450px;
+}
+
+.row {
+  margin-top: -2.5vh;
+}
+
+h2.blog-post-title {
+  margin-bottom: 10px;
+}
+
+.blog-post-meta {
+  margin-bottom: 20px;
+  color: red;
+}
+
+.intro {
+  padding-left: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.question {
+  text-align: left;
+  width: 70%;
+  padding-left: 100px;
+  margin:40px;
+}
+
+.answer {
+  text-align: left;
+  width: 100%;
+  padding-left: 25px;
+}
+
+.gridcontainer h2 a{color: #333; font-size: 13px;}
+.gridcontainer .griditemleft{float: left; width: 150px; margin: 0 30px 20px 0;}
+.gridcontainer .griditemright{float: left; width: 150px;}
+.gridcontainer .postimage{margin: 0 0 5px 0;}
+.gridcontainer .postimage-title {text-align: center;}
