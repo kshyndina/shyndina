@@ -41,7 +41,6 @@
         margin-top: 0;
         height: 0;
         overflow: hidden;
-        pointer-events: none;
       }
 
       .video-container iframe,
@@ -52,34 +51,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        pointer-events: none;
-      }
-
-      .video-controls {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        z-index: 10;
-        display: flex;
-        gap: 5px;
-        pointer-events: auto;
-      }
-
-      .mute-btn, .replay-btn, .pause-btn {
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 5px 10px;
-        cursor: pointer;
-        font-size: 12px;
-        transition: background-color 0.3s;
-        pointer-events: auto;
-      }
-
-      .mute-btn:hover, .replay-btn:hover, .pause-btn:hover {
-        background-color: rgba(0, 0, 0, 0.7);
-        pointer-events: none;
       }
 
       .project img {
@@ -92,16 +63,15 @@
         width: auto;
         cursor: context-menu;
         margin-top: 5px;
+        padding-bottom: 0;
       }
 
       .intro {
         width: auto;
         padding-left: 25px;
         padding-top: 20px;
-        padding-bottom: 50px;
       }
 
-      .col-sm-3,
       .blog-sidebar,
       .col-sm-offset-1 {
         width: 40%;
@@ -114,6 +84,18 @@
         position: fixed;
         left: 0;
         padding-bottom: 50px;
+        box-sizing: border-box;
+      }
+
+      .col-sm-3 {
+        width: 40%;
+        font-size: 1.2rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 100vh;
+        color: black;
+        position: fixed;
+        left: 0;
         box-sizing: border-box;
       }
 
@@ -175,19 +157,76 @@
       }
 
       @media screen and (max-width: 400px) {
-        .blog-main {
-          display: block;
-          width: 100%;
+        body {
+          background-color: white;
+          margin: 0;
+          padding: 0;
         }
-        .col-sm-8 {
-          float: right;
-          width: 80% !important;
-          margin-right: 1px;
-          margin-top: none;
-        }
-        .content {
+        
+        .blog-masthead,
+        .blog-header,
+        .blog-main,
+        .blog-sidebar {
           display: none;
         }
+        
+        .mobile-menu {
+          display: flex !important;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          width: 100%;
+          background-color: white;
+          font-family: "Space Mono", sans-serif;
+        }
+        
+        .mobile-content {
+          display: none !important;
+          padding: 20px;
+          font-family: "Space Mono", sans-serif;
+          font-size: 1.2rem;
+          color: black;
+          line-height: 1.6;
+          overflow-y: auto;
+          height: 100vh;
+          box-sizing: border-box;
+        }
+        
+        .mobile-back-link {
+          display: block;
+          margin-bottom: 20px;
+          color: black;
+          text-decoration: none;
+          font-family: "Space Mono", sans-serif;
+        }
+        
+        .mobile-back-link:hover {
+          text-decoration: underline;
+        }
+      }
+      
+      .mobile-menu {
+        display: none;
+      }
+      
+      .mobile-content {
+        display: none;
+      }
+      
+      .mobile-menu-link {
+        color: black;
+        text-decoration: none;
+        font-size: 1.2rem;
+        margin: 4px 0;
+        padding: 8px 0;
+        border-bottom: 1px solid transparent;
+        transition: border-bottom 0.3s;
+      }
+      
+      .mobile-menu-link:hover {
+        text-decoration: none;
+        border-bottom: 1px solid black;
       }
 
       a {
@@ -319,6 +358,285 @@
   </head>
 
   <body>
+    <!-- Mobile Menu (shown only on mobile) -->
+    <div class="mobile-menu">
+      <a href="#" class="contact-link mobile-menu-link" data-content="my-story">my story</a>
+      <a href="#" class="contact-link mobile-menu-link" data-content="creative-production">creative production</a>
+    </div>
+    
+    <!-- Mobile My Story Content -->
+    <div class="mobile-content" id="mobile-my-story">
+      <a href="#" class="mobile-back-link">← back</a>
+      <div class="intro">
+        <p class="answer">
+          <i>Ukrainian-born, world-wandering marketing & project manager</i>
+        </p>
+        <p class="answer">
+          (Remote Operations HQ, TimeZone Flexible, INT 00001, Global)
+        </p>
+        <p class="answer">The cast of characters:</p>
+        <ul style="padding-left: 25px; margin-left: 0;">
+          <li>Kateryna Shyndina, webpage owner</li>
+          <li>A visitor</li>
+        </ul>
+      </div>
+      <p class="answer">Hello visitor, how are you?</p>
+      <p class="question">
+        Hey hey hey! I'm doing well, so... you're looking for job I see. How did you get here?
+      </p>
+      <p class="answer">
+        It all started with analyzing lipstick sales at Maybelline in 2020. The path involved 3 L'Oréal brands, 1 CRO agency, multiple country moves, and a Web3 startup that taught me more in 10 months than some people learn in years.
+      </p>
+      <p class="question">And when do you say all of this happened? Tell me.</p>
+      <div class="company answer">
+        L'Oréal (2020-2023): Corporate / FMCG / Beauty
+
+        Maybelline → Kiehl's → Vichy
+        Kyiv → Prague
+      <ul style="padding-left: 25px; margin-left: 0;">
+        <li>Managed creative & media agencies for campaign launches</li>
+        <li>Led first L'Oréal Luxe multibrand promo with major retail partner</li>
+        <li>Coordinated cross-functional teams: SMM, PR, retail, business development</li>
+        <li>Monthly sales analysis and competitor research (got embarrassingly good at Excel)</li>
+        <li>Briefed agencies, managed influencer squads with PR teams, executed product launches with all operational work - listings, sales materials, POS, pricing, forecasts</li>
+        <li>Learned that big budgets don't guarantee good work - they only guarantee more meetings and intermediaries</li></ul>
+        <strong>Key lesson:</strong> Corporate results don't need to be groundbreaking or exceptional. They just need to be predictable. As long as it was forecasted - it's fine.
+      </div>
+      <p class="question">And then what happened?</p>
+      <div class="company answer">
+        Spiralyze (2024-2025): Agency / SaaS & D2C
+        Project Manager, CRO Agency
+        Remote
+        
+        <ul style="padding-left: 25px; margin-left: 0;">
+          <li>Managed 5+ parallel SaaS and D2C client projects simultaneously</li>
+          <li>Coordinated designers, developers, QA specialists, and clients who changed their minds weekly</li>
+          <li>Analyzed and segmented traffic/conversion data, presented insights to stakeholders weekly</li>
+          <li>Built A/B testing roadmaps using competitor analysis, winning patterns, and user funnel research</li>
+          <li>Kept all teams aligned during constant priority shifts</li>
+          <li>Worked with teams across 5+ time zones daily</li></ul>
+          <strong>Key lesson:</strong> A lot of times, what you like better won't be what actually converts (Data > opinions). Between a proven winning pattern and a new "genius" solution - the first wins 99.99% of the time. Also, I'm really good at organizing chaos.
+      </div>
+      <p class="question">And what was next? Don't tell me it's Web3!</p>
+      <div class="company answer">
+        Dexcelerate (2025): Startup / Crypto-Trading / Trenches
+        Marketing Director, DeFi Trading Platform
+        Remote
+        
+        <ul style="padding-left: 25px; margin-left: 0;">
+          <li>Built marketing operations from scratch for Solana/BNB memecoin trading platform.</li>
+          <li>Team Building (0→5): Built marketing and creative team from ground zero</li>
+          <li>Created workflows, asset/sound libraries, production pipelines</li>
+          <li>Implemented rolling 3-month content roadmap</li>
+          <li>Produced all video and static content in-house with zero outsourcing</li>
+          <li>Content Production: Studio-quality feature/release videos in weeks, not months</li>
+          <li>Built product academy showing users how to use advanced features (halved support tickets)</li>
+          <li>Translated complex concepts (limit orders, autotrading) into language normal humans and degens would understand</li>
+          <li>Pioneered AI UGC strategy: thousands of TikTok views, zero production budget</li></ul>
+        <strong>Key lesson:</strong> There's always something you can do better. Usually a lot. Give 10 people the same creative task - 5 will quote you $1000 and a week, 3 will do it for $400 in a few days, 2 will do it free by tomorrow. Only 1 will do it well. Price rarely reflects skill.
+      </div>
+    </div>
+    
+    <!-- Mobile Creative Production Content -->
+    <div class="mobile-content" id="mobile-creative-production">
+      <a href="#" class="mobile-back-link">← back</a>
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/uUS6kgPrIKY"
+              title="Release"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Release</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            A huge 2.0 re-launch of Dexcelerate — the new design rollout introducing multiple first-on-market trading features and showing how the platform gives traders a real edge.
+          </p>
+        </span>
+      </div>
+
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/cB3YJoFsaLo"
+              title="Trackers"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Trackers</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            Interface and motion design for Dexcelerate's Trackers — four interchangeable panels that replace endless browser tabs. Users can view Twitter, Memepool, and Watchlist data together in one synced, trade-ready dashboard.
+          </p>
+        </span>
+      </div>
+
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/mJcG9P9oyzs"
+              title="Twitter/X"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Twitter/X</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            System design for the X integration that autotrades the moment a KOL posts. Traders can link their accounts, set rules, and let bots execute instantly — no need to stay awake waiting for a drop.
+          </p>
+        </span>
+      </div>
+
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/w3v5mKAH8Do"
+              title="Lists (Multi-Agent)"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Lists (Multi-Agent)</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            Creative direction for Dexcelerate's Lists — also known as Multi-Agent automation. A network of bots that combine Telegram, X, Discord, wallets, and real-time filters to trade like a full 24/7 team.
+          </p>
+        </span>
+      </div>
+
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/wnbt3lZDM1w"
+              title="Telegram"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Telegram</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            Visual and product design for the Telegram integration. It scans posts for contract addresses, logs and ranks callers, and lets users autotrade verified signals with custom filters.
+          </p>
+        </span>
+      </div>
+
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/UE9HK_G0rF8"
+              title="Automation"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Automation</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            Experience design for the Autotrading engine that executes trades fully under user control — from entry and exit rules to stop-loss and take-profit targets — running continuously around the clock.
+          </p>
+        </span>
+      </div>
+
+      <div class="box">
+        <div class="project" id="style-14">
+          <div class="video-container">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/3RmEl7asT4s"
+              title="Channels"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      
+      <div class="metadata">
+        <h2 class="blog-post-title">
+          <span style="color: #949ba3">Title – </span>
+          <i>Channels</i>
+        </h2>
+        <span class="excerpt">
+          <p>
+            Analytics interface for Channels — a data hub that tracks every caller's win rate, ROI, and top tokens, helping users follow only the most profitable sources.
+          </p>
+        </span>
+      </div>
+    </div>
+
     <div class="blog-masthead">
       <div class="container"></div>
     </div>
@@ -354,20 +672,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-1"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/uUS6kgPrIKY?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/uUS6kgPrIKY"
                     title="Release"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-1">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-1">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-1">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -390,20 +702,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-2"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/cB3YJoFsaLo?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/cB3YJoFsaLo"
                     title="Trackers"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-2">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-2">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-2">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -426,20 +732,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-3"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/mJcG9P9oyzs?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/mJcG9P9oyzs"
                     title="Twitter/X"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-3">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-3">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-3">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -462,20 +762,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-4"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/w3v5mKAH8Do?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/w3v5mKAH8Do"
                     title="Lists (Multi-Agent)"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-4">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-4">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-4">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -498,20 +792,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-5"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/wnbt3lZDM1w?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/wnbt3lZDM1w"
                     title="Telegram"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-5">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-5">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-5">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -534,20 +822,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-6"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/UE9HK_G0rF8?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/UE9HK_G0rF8"
                     title="Automation"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-6">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-6">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-6">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -570,20 +852,14 @@
               <div class="project" id="style-14">
                 <div class="video-container">
                   <iframe
-                    id="video-7"
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/3RmEl7asT4s?controls=0&modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
+                    src="https://www.youtube.com/embed/3RmEl7asT4s"
                     title="Channels"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                   ></iframe>
-                  <div class="video-controls">
-                    <button class="replay-btn" data-video-id="video-7">🔄 Replay</button>
-                    <button class="pause-btn" data-video-id="video-7">⏸️ Pause</button>
-                    <button class="mute-btn" data-video-id="video-7">🔇 Unmute</button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -694,9 +970,9 @@
               <strong>I don't want:</strong> Task management roles. Bureaucracy. More meetings than output. "We've always done it this way".
 
               Let's talk:
-              <a href="mailto:kate.shyndina@gmail.com" class="contact-link">kate.shyndina@gmail.com</a>
+              <a href="mailto:kate.shyndina@gmail.com" class="contact-link">Email: kate.shyndina@gmail.com</a>
               <a href="https://t.me/byshyndina" target="_blank" class="contact-link">Telegram: @byshyndina</a>
-              <a href="https://linkedin.com/in/shyndina" target="_blank" class="contact-link">LinkedIn: @shyndina</a>
+              <a href="https://linkedin.com/in/shyndina" target="_blank" class="contact-link">LinkedIn: Kateryna Shyndina</a>
             </div>
           </div>
         </div>
@@ -706,31 +982,6 @@
     </div>
 
     <script>
-      // Load YouTube IFrame API
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // Global variable to store players
-      var players = {};
-
-      // This function is called by the YouTube API when it's ready
-      function onYouTubeIframeAPIReady() {
-        // Initialize all video players
-        for (var i = 1; i <= 7; i++) {
-          var playerId = 'video-' + i;
-          players[playerId] = new YT.Player(playerId, {
-            events: {
-              'onReady': function(event) {
-                // All videos start muted
-                event.target.mute();
-              }
-            }
-          });
-        }
-      }
-
       // Updated JavaScript for local paths
       jQuery(document).ready(function ($) {
         var path = "assets/bars/",
@@ -754,54 +1005,20 @@
         jQuery(".blog-title").click(function () {
           jQuery("#home").addClass("rotate");
         });
-
-        // Mute/Unmute button functionality
-        jQuery('.mute-btn').on('click', function(e) {
+        
+        // Mobile navigation functionality
+        jQuery(document).on('click', '.mobile-menu-link', function(e) {
           e.preventDefault();
-          e.stopPropagation();
-          var videoId = jQuery(this).data('video-id');
-          var player = players[videoId];
-          
-          if (player) {
-            if (player.isMuted()) {
-              player.unMute();
-              jQuery(this).html('🔊 Mute');
-            } else {
-              player.mute();
-              jQuery(this).html('🔇 Unmute');
-            }
-          }
+          var contentType = jQuery(this).data('content');
+          console.log('Clicked:', contentType);
+          jQuery('.mobile-menu').hide();
+          jQuery('#mobile-' + contentType).show();
         });
-
-        // Replay button functionality
-        jQuery('.replay-btn').on('click', function(e) {
+        
+        jQuery(document).on('click', '.mobile-back-link', function(e) {
           e.preventDefault();
-          e.stopPropagation();
-          var videoId = jQuery(this).data('video-id');
-          var player = players[videoId];
-          
-          if (player) {
-            player.seekTo(0);
-            player.playVideo();
-          }
-        });
-
-        // Pause/Play button functionality
-        jQuery('.pause-btn').on('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var videoId = jQuery(this).data('video-id');
-          var player = players[videoId];
-          
-          if (player) {
-            if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-              player.pauseVideo();
-              jQuery(this).html('▶️ Play');
-            } else {
-              player.playVideo();
-              jQuery(this).html('⏸️ Pause');
-            }
-          }
+          jQuery('.mobile-content').hide();
+          jQuery('.mobile-menu').show();
         });
       });
     </script>
